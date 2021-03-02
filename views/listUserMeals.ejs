@@ -1,0 +1,64 @@
+
+<html>
+  <head>
+    <style>
+      td{
+          width: 150px;
+          padding: 5px;
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/admin/usermeals" method="POST">
+      <select name="username" onchange="this.form.submit()">
+        <option value = "<%= usernameSelected%>"> <%= usernameSelected %> </option> <!--This is so that we can show the selected user as selected by default-->
+        <%  for(user of usersArr)
+            {
+              if(user.username == usernameSelected)
+                continue;
+        %>
+              <option value = "<%= user.username %>" > <%= user.username %> </option>
+        <%  }
+        %>
+      </select>
+    </form>
+
+    <%  if(status == -1){  %>
+          <script>alert("Error while Fetching the users. Contact Customer Support")</script>
+    <%  }
+        if(status == -2){   %>
+          <script>alert("Error while Fetching meals for the User. Contact Customer Support")</script>
+    <%  }
+    %>
+
+    <%
+      if(mealsArr.length > 0)
+          for(let meal of mealsArr)
+          {
+    %>
+              <form method='POST'>
+                  <input type="hidden" name="username" value = "<%= usernameSelected %>">
+                  <input type="hidden" name="name" value = "<%= meal.filtered_meals.name %>">
+                  <input type="hidden" name="calorie" value = "<%= meal.filtered_meals.calorie %>">
+                  <input type="hidden" name="description" value = "<%= meal.filtered_meals.description %>">
+                  <table>
+                      <tr>
+                          <td><%= meal.filtered_meals.name %></td>
+                          <td><%= meal.filtered_meals.description %></td>
+                          <td><%= meal.filtered_meals.calorie %></td>
+                          <td><button type="submit" name="Edit" formaction='/admin/usermeals/<%= meal.filtered_meals.id %>/edit'>Edit</button></td><!--https://stackoverflow.com/questions/14765170/one-form-with-two-submit-buttons-and-different-actions-for-each-button/57038099-->
+                          <td><button type="submit" name="Delete" formaction="/api/admin/usermeals/<%= meal.filtered_meals.id %>/removeMeal">Delete</button></td>
+                      </tr>
+                  </table>
+              </form>
+    <%
+          }
+      else {
+    %>
+        <p>No Meals Found</p>
+    <%
+      } 
+    %>
+  </body>
+</html>

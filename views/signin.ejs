@@ -1,0 +1,24 @@
+<html>
+    <body>
+        <%  if(sucess == 1) {   %>
+                <script>alert("Registered Sucessfully!")</script>
+        <%  }
+            else if(sucess == 0){   %>
+                <script>alert("Password's Don't Match")</script>
+        <%  }
+            else if(sucess == -1){  %>
+                <script>alert("User might Not be Registered. Please Register. If registered then an error occured from our side. Please contact customer support")</script>
+        <%  }
+         %>
+        <script>
+        </script>
+        <form action = "/api/authenticate" method = "POST">
+            Username<input type="text" name="username"><br>
+            Passsword<input type="password" name="password"><br>
+            <input type="submit" value="signin">
+        </form>
+        <form action="/signup">
+            <input type="submit" value="signup">
+        </form>
+    </body>
+</html>

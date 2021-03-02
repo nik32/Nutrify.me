@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style>
+            td{
+                width: 150px;
+                padding: 5px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1> HOME </h1><br>
+        <%  if(status == -1){   %>
+                <script>alert("An error occured while listing Users. Contact Customer Support")</script>
+        <%  }
+        %>
+        
+        <%
+            if(usersArr.length > 0)
+            {
+                for(let user of usersArr)
+                {
+        %>
+                    <form method='POST'>
+                        <input type="hidden" name="first" value = "<%= user.first %>">
+                        <input type="hidden" name="last" value = "<%= user.last %>">
+                        <!-- <input type="hidden" name="username" value = "<%= user.username %>"> -->
+                        <input type="hidden" name="cals_per_day" value = "<%= user.cals_per_day %>">
+                        <input type="hidden" name="phone" value = "<%= user.phone %>">
+                        <input type="hidden" name="email" value = "<%= user.email %>">
+                        <table>
+                            <tr>
+                                <!-- <td><%= user.first %></td>
+                                <td><%= user.last %></td> -->
+                                <td><%= user.username %></td>
+                                <!-- <td><%= user.cals_per_day %></td> -->
+                                <td><%= user.phone %></td>
+                                <td><%= user.email %></td>
+                                <td><button type="submit" name="Edit" formaction='/admin/user/<%= user.username %>/edit'>Edit</button></td><!--https://stackoverflow.com/questions/14765170/one-form-with-two-submit-buttons-and-different-actions-for-each-button/57038099-->
+                                <td><button type="submit" name="Delete" formaction="/api/admin/user/<%= user.username %>/removeUser">Delete</button></td>
+                            </tr>
+                        </table>
+                    </form>
+        <%
+                }
+            }
+        %>
+
+
+    </body>
+</html>

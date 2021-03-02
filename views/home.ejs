@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <style>
+            td{
+                width: 150px;
+                padding: 5px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1> HOME </h1><br>
+        <%  if(status == 1) {   %>
+                <script>alert("Added meal Sucessfully!")</script>
+        <%  }
+            else if(status == -1){   %>
+                <script>alert("Couldn't Add the meal To the DB. Contact Customer Support")</script>
+        <%  }
+            else if(status == 2){   %>
+                <script>alert("Updated meals sucessfully")</script>
+        <%  }
+            else if(status == -2){  %>
+                <script>alert("Couldn't Update meal in the DB. Contact Customer Support")</script>
+        <%  }
+            else if(status == 3){   %>
+                <script>alert("Removed meals sucessfully")</script>
+        <%  }
+            else if(status == -3){  %>
+                <script>alert("Couldn't Remove meal from the DB. Contact Customer Support")</script>
+        <%  }
+            
+            if(status == -4){  %>
+                <script>alert("Error while Fetching meals for the date. Contact Customer Support")</script>
+        <%  }
+        %>
+        
+        <%
+            if(mealsArr.length > 0)
+            {
+                let total_cals = parseInt(mealsArr[0].cals_per_day);
+                let cal_consumed = 0;
+                for(let meal of mealsArr)
+                {
+                    cal_consumed += meal.filtered_meals.calorie;
+        %>
+                    <form method='POST'>
+                        <input type="hidden" name="name" value = "<%= meal.filtered_meals.name %>">
+                        <input type="hidden" name="calorie" value = "<%= meal.filtered_meals.calorie %>">
+                        <input type="hidden" name="description" value = "<%= meal.filtered_meals.description %>">
+                        <table>
+                            <tr>
+                                <td><%= meal.filtered_meals.name %></td>
+                                <td><%= meal.filtered_meals.description %></td>
+                                <td><%= meal.filtered_meals.calorie %></td>
+                                <td><button type="submit" name="Edit" formaction='/meals/<%= meal.filtered_meals.id %>/edit'>Edit</button></td><!--https://stackoverflow.com/questions/14765170/one-form-with-two-submit-buttons-and-different-actions-for-each-button/57038099-->
+                                <td><button type="submit" name="Delete" formaction="/api/meals/<%= meal.filtered_meals.id %>/removeMeal">Delete</button></td>
+                            </tr>
+                        </table>
+                    </form>
+        <%
+                }
+                if(cal_consumed > total_cals) {  %>
+                   <script>alert("Hey, Not Fair. You Have Exceeded Your Daily Calorie Limit!")</script>
+        <%      }
+            }
+        %>
+
+        <form action='/signout' method='GET'>
+            <input type="submit" value="logout">
+        </form>
+        <form action='/meals/addMeal' method='GET'>
+            <input type="submit" value="Add">
+        </form>
+
+        <% if(isAdmin)  { %>
+            <form action='/admin/users' method='GET'>
+                <input type="submit" value="List Users">
+            </form>
+            <form action='/admin/usermeals' method='POST'>
+                <input type="submit" value="List User Meals">
+            </form>
+        <%  }
+        %>
+
+    </body>
+</html>

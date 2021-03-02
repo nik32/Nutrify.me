@@ -1,0 +1,20 @@
+<html>
+    <body>
+        <% if(fail) { %>
+            <script>alert("Failed to register. Call Customer support\n")</script>
+        <% } %>
+        <form action = "/api/addUser" method = "POST">
+            First Name<input type="text" name="first"><br>
+            Last Name<input type="text" name="last"><br>
+            Phone<input type="tel" name="phone"><br>
+            Email<input type="email" name="email"><br>
+            Calories per day<input type="number" name="cals_per_day"><br>
+            Username<input type="text" name="username"><br>
+            Passsword<input type="password" name="password"><br>
+            <input type="submit" value="signup">
+        </form>
+        <form action="/signin">
+            <input type="submit" value="signin">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+change the DB QUERIES TO MAKE READS RELATED TO MEALS ARRAY MUCH MORE FASTER
+
+get the calorie value from - https://www.nutritionix.com/business/api
+
+in geteMEalsArraBy() [given in model/user], you are fetching the array, then sperating it into a document, thne sorting, and then again repackaging the result into an array.
+This is inefficent as the other thing you could do is fetch only the array and then sort it on the client side (skipping the seperating in doc and repackaging it again into an array). LINk -
+https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+
+add CSRF protection
+
+you made the api & route for edit in a hurry. Recheck for errors 
+
+imporve modularizaion (MVC) and names of routes
+
+wherever you have rendered, use res.redirect so that url also changes. If you want to pass the data use session. or you can create a ejs page which will only diplay various alerts. This way you can use render to call the alert.ejs and pass the alert code to display the alert. Then you can call the url assocaited with the alert code, from alert.ejs. Thus this will redirect and change the url also
+
+Where ever you edit operation (either to edit meals info or user info from admin) so it using modal sheet so as to save re-rendering of the home page.
+
+the edit user meals module in admin is using the same contorllers and routes used in meals module (with some changes). Just find some way so that there is only 1 code base. (NOTE - The models code used is same. Just the way of rendering i.e views is changings).One thing you can do is to get all the values you need, in form of params (dynamic or query params). So username, or id, or the view to be renderd fter completion (admin's editUserMEal or user's home). 
+
+make the dropdown in edit user meals, searchable i.e. a usershould be able to search the user name whose meals he wants to edit.
+(https://select2.org/getting-started/basic-usage
+https://stackoverflow.com/questions/36712967/single-dropdown-with-search-box-in-it
+)
+
+add datepicker, sortOrder, sortBy in both home and editUserMeals

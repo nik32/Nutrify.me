@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <form action = "/api/meals/addMeal" method = "POST">
+            Name<input type="text" name="name"><br>
+            Calories<input type="number" name="calorie"><br>
+            Description<input type="text" name="description"><br>
+            ID<input type="text" value = <%= id %> disabled><br>
+            <input type="hidden" name="id" value = <%= id %>><br>
+            <input type="submit" value="Add Meal">
+        </form>
+    </body>
+</html>

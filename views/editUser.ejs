@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <form action = "/api/admin/user/<%= username %>/updateUser" method = "POST">
+            First Name<input type="text" name="first" value = "<%= first %>"><br>
+            Last Name<input type="text" name="last" value = "<%= last %>"><br>
+            Phone<input type="tel" name="phone" value = "<%= phone %>"><br>
+            Email<input type="email" name="email" value = "<%= email %>"><br>
+            Calories per day<input type="number" name="cals_per_day" value = <%= cals_per_day %>><br>
+            <input type="submit" value="Update">
+        </form>
+    </body>
+</html>

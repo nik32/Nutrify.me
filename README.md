@@ -1,8 +1,8 @@
 # Nutrify.me
 To run the app demo - 
-1. Make a config folder, with a keys.js file containing your mongoURL in following format -/n
-   module.exports = { 
-     mongoURL: //YOur mongoURL
+1. Make a config folder, with a keys.js file containing your mongoURL in following format -  
+   module.exports = {  
+      mongoURL: //YOur mongoURL  
    }
 2. download the code from the repositries and type the following commands in the root folder -
    a. npm install
